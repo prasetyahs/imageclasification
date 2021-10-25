@@ -135,7 +135,7 @@ function getLocalIp()
 // $validation  = [];
 // $i = 0;
 // foreach ($testSample as $t) {
-    //     $predict = $classifier->predict($t) === $testLabels[$i] ? 1 : 0;
+//     $predict = $classifier->predict($t) === $testLabels[$i] ? 1 : 0;
 //     array_push($validation, $predict);
 //     $i++;
 // }
@@ -143,13 +143,13 @@ function getLocalIp()
 // print_r($validation);
 
 header('Content-Type: application/json');
-$imageInput = array_to1d(array_to1d(getArrayOfPixelsFromFile("dtset/kanaBA1.jpg")));
+$imageInput = array_to1d(array_to1d(getArrayOfPixelsFromFile("dtset/kanaCHI14.jpg")));
 $result = knnProcess($imageInput);
 $predictImageSum = array_sum(array_to1d(array_to1d(getArrayOfPixelsFromFile(loadImagePredict()[$result['index']]))));
 $imageInputSum = array_sum($imageInput);
 $percent = ($imageInputSum / $predictImageSum) * 100;
 echo json_encode([
-    "gambar" => "http://" . getLocalIp() . "/imageClassifitcation/" . loadImagePredict()[$result['index']],
-    "prediksi" => $result['predict'],
-    "persentase_kemiripan" => $percent
+    "image_prediction" => "http://" . getLocalIp() . "/imageClassifitcation/" . loadImagePredict()[$result['index']],
+    "prediction" => $result['predict'],
+    "similarity_percentage" => $percent
 ]);
