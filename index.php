@@ -5,6 +5,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Phpml\Classification\KNearestNeighbors;
 use Phpml\Math\Distance\Euclidean;
 use Phpml\Metric\Regression;
+use Phpml\CrossValidation\RandomSplit;
+use Phpml\DataSet\ArrayDataSet;
 
 function getArrayOfPixelsFromFile($source)
 {
@@ -16,7 +18,6 @@ function getArrayOfPixelsFromFile($source)
     for ($y = 0; $y < $height; $y++) {
         $y_array = array();
         for ($x = 0; $x < $width; $x++) {
-
             $rgb = imagecolorat($image, $x, $y);
             //echo $rgb." = ".decbin($rgb),"<br>";
             //Seleciona os primeiros dois bytes que representam vermelho
@@ -97,10 +98,15 @@ function getDistance($imageInput)
     return $distanceTmp;
 }
 
-function knnProcess()
+function splitData($dataset)
 {
-    $imageInput = array_to1d(array_to1d(getArrayOfPixelsFromFile("dtset/kanaBA1.jpg")));
-    $classifier = new KNearestNeighbors($k = 2,);
+    $dataset = new RandomSplit($dataset, 0.3, 1234);
+    return $dataset;
+}
+
+function knnProcess($imageInput)
+{
+    $classifier = new KNearestNeighbors($k = 2, new Euclidean());
     $classifier->train(loadData(), labeling());
     $distance = getDistance($imageInput);
     $predict = $classifier->predict($imageInput);
@@ -112,20 +118,38 @@ function knnProcess()
     ];
     return $result;
 }
-// $key = array_search(min(getDistance()), getDistance());
-$result = knnProcess();
-// echo '<img src= "' . loadImagePredict()[$result['index']] . '"alt="Girl in a jacket" width="500" height="600">';
-// echo "<pre>";
-// echo $result['predict'];
-
 function getLocalIp()
 {
     return gethostbyname(trim(`hostname`));
 }
+
+// -- cross validation random split --
+// $dataset = new ArrayDataset(loadData(), labeling());
+// $dataset = new RandomSplit($dataset, 0.3);
+// $testSample = $dataset->getTestSamples();
+// $testLabels =  $dataset->getTestLabels();
+// $trainSample = $dataset->getTrainSamples();
+// $trainLabel = $dataset->getTrainLabels();
+// $classifier = new KNearestNeighbors($k = 3, new Euclidean());
+// $classifier->train($trainSample, $trainLabel);
+// $validation  = [];
+// $i = 0;
+// foreach ($testSample as $t) {
+    //     $predict = $classifier->predict($t) === $testLabels[$i] ? 1 : 0;
+//     array_push($validation, $predict);
+//     $i++;
+// }
+
+// print_r($validation);
+
 header('Content-Type: application/json');
+$imageInput = array_to1d(array_to1d(getArrayOfPixelsFromFile("dtset/kanaBA1.jpg")));
+$result = knnProcess($imageInput);
+$predictImageSum = array_sum(array_to1d(array_to1d(getArrayOfPixelsFromFile(loadImagePredict()[$result['index']]))));
+$imageInputSum = array_sum($imageInput);
+$percent = ($imageInputSum / $predictImageSum) * 100;
 echo json_encode([
     "gambar" => "http://" . getLocalIp() . "/imageClassifitcation/" . loadImagePredict()[$result['index']],
     "prediksi" => $result['predict'],
-
-
+    "persentase_kemiripan" => $percent
 ]);
