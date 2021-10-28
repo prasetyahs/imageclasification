@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "524219cd4818c66bd94006d110b5c350",
+    "content-hash": "f791c432695f417b93c8cfd5e161e341",
     "packages": [
+        {
+            "name": "kzykhys/steganography",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kzykhys/Steganography.git",
+                "reference": "d60fdf365679a1ed5dcca6e3a4741df245c16bd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kzykhys/Steganography/zipball/d60fdf365679a1ed5dcca6e3a4741df245c16bd6",
+                "reference": "d60fdf365679a1ed5dcca6e3a4741df245c16bd6",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/options-resolver": "~2.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kazuyuki Hayashi",
+                    "email": "hayashi@valnur.net"
+                }
+            ],
+            "description": "Simple implementation of Steganography (Hiding a hidden message within an image)",
+            "keywords": [
+                "steganography"
+            ],
+            "support": {
+                "issues": "https://github.com/kzykhys/Steganography/issues",
+                "source": "https://github.com/kzykhys/Steganography/tree/master"
+            },
+            "time": "2014-01-24T17:50:32+00:00"
+        },
         {
             "name": "php-ai/php-ml",
             "version": "0.9.0",
@@ -62,12 +106,71 @@
                 "issues": "https://gitlab.com/api/v4/projects/19024967/issues"
             },
             "time": "2020-05-27T09:52:59+00:00"
+        },
+        {
+            "name": "symfony/options-resolver",
+            "version": "v2.8.52",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "7aaab725bb58f0e18aa12c61bdadd4793ab4c32b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/7aaab725bb58f0e18aa12c61bdadd4793ab4c32b",
+                "reference": "7aaab725bb58f0e18aa12c61bdadd4793ab4c32b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony OptionsResolver Component",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/options-resolver/tree/v2.8.50"
+            },
+            "time": "2018-11-11T11:18:13+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kzykhys/steganography": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14
 {
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Component\\OptionsResolver\\' => 34,
+        ),
         'P' => 
         array (
             'Phpml\\' => 6,
@@ -14,10 +18,18 @@ class ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\OptionsResolver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
         'Phpml\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
         ),
+    );
+
+    public static $fallbackDirsPsr0 = array (
+        0 => __DIR__ . '/..' . '/kzykhys/steganography/src',
     );
 
     public static $classMap = array (
@@ -29,6 +41,7 @@ class ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit0194bdcbe1a52ece3adb72b1bd2f2b14::$classMap;
 
         }, null, ClassLoader::class);
